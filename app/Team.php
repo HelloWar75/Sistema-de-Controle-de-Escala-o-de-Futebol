@@ -9,6 +9,8 @@ class Team extends Model implements Transformable
 {
     //
 
+    protected $fillable = ['name'];
+
     public function transform()
     {
         // TODO: Implement transform() method.

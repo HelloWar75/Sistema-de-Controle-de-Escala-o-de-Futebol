@@ -68,7 +68,7 @@
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
-                                    </form>
+                                    </form>1/edit
                                 </div>
                             </li>
                         @endguest
@@ -81,5 +81,6 @@
             @yield('content')
         </main>
     </div>
+    @yield('footer_scripts')
 </body>
 </html>

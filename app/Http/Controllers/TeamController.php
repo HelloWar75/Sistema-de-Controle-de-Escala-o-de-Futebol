@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\TeamRepositoryEloquent;
 use App\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TeamController extends Controller
 {
@@ -55,6 +56,20 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         //
+        $validator = Validator::make($request->all(),[
+          'name' => 'required|unique:teams|max:255|min:5'
+        ]);
+
+        if ( $validator->fails() ) {
+          return redirect(route('team.create'))->withErrors($validator)->withInput();
+        }
+
+        $name = $request->name;
+        $this->repository->create([
+          'name' => $name
+        ]);
+
+        return redirect(route('team.index'))->with('status', 'Criado com sucesso!');
     }
 
     /**
