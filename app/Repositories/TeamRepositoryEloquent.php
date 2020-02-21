@@ -2,10 +2,11 @@
 
 namespace App\Repositories;
 
+use Illuminate\Container\Container as Application;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\TeamRepository;
-use App\Entities\Team;
+use App\Team;
 use App\Validators\TeamValidator;
 
 /**
@@ -15,6 +16,7 @@ use App\Validators\TeamValidator;
  */
 class TeamRepositoryEloquent extends BaseRepository implements TeamRepository
 {
+
     /**
      * Specify Model class name
      *

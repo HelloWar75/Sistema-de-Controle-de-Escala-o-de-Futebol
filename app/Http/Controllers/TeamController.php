@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\TeamRepositoryEloquent;
 use App\Team;
 use Illuminate\Http\Request;
 
 class TeamController extends Controller
 {
+
+    protected $repository;
+
+    public function __construct(TeamRepositoryEloquent $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +24,14 @@ class TeamController extends Controller
     public function index()
     {
         //
+        $repo_data = $this->repository->paginate(2);
+        $data = [];
+        $data["teams"] = $repo_data["data"];
+        $pagination = $repo_data["meta"]["pagination"];
+        $data["links"] = paginate(route('team.index'), $pagination["current_page"], $pagination["total"], $pagination["per_page"]);
+
+        //dd($data["links"]);
+        return view('team.index', $data);
     }
 
     /**
