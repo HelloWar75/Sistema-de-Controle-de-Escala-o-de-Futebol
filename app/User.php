@@ -5,8 +5,9 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Prettus\Repository\Contracts\Transformable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Transformable
 {
     use Notifiable;
 
@@ -36,4 +37,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function transform()
+    {
+        // TODO: Implement transform() method.
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email
+        ];
+    }
 }
