@@ -24,10 +24,10 @@ class TeamController extends Controller
     public function index()
     {
         //
-        $repo_data = $this->repository->paginate(2);
         $data = [];
-        $data["teams"] = $repo_data["data"];
+        $repo_data = $this->repository->paginate(2);
         $pagination = $repo_data["meta"]["pagination"];
+        $data["teams"] = $repo_data["data"];
         $data["links"] = paginate(route('team.index'), $pagination["current_page"], $pagination["total"], $pagination["per_page"]);
 
         //dd($data["links"]);
@@ -42,6 +42,8 @@ class TeamController extends Controller
     public function create()
     {
         //
+
+        return view('team.create');
     }
 
     /**
