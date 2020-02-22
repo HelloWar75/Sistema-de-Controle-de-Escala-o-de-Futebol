@@ -14,14 +14,14 @@ class TeamSeed extends Seeder
     {
         //
         $teams = [
-          'Grêmio',
-          'Internacional'
+            'Grêmio',
+            'Internacional'
         ];
 
         foreach ($teams as $v) {
-          Team::create([
-            'name' => $v
-          ]);
+            Team::create([
+                'name' => $v
+            ]);
         }
     }
 }
