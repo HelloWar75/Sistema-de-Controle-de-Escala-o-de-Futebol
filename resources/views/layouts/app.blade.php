@@ -39,6 +39,9 @@
                         <li class="nav-item">
                             <a href="{{ route('team.index') }}" class="nav-link">Equipe</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('athlete.index') }}" class="nav-link">Atletas</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -81,6 +84,12 @@
             @yield('content')
         </main>
     </div>
+    <script>
+        function submit(form_name) {
+            var form = document.getElementById(form_name);
+            form.submit();
+        }
+    </script>
     @yield('footer_scripts')
 </body>
 </html>

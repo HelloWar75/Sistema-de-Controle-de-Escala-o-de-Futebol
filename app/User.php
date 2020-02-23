@@ -7,7 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Prettus\Repository\Contracts\Transformable;
 
-class User extends Authenticatable implements Transformable
+class User extends Authenticatable
 {
     use Notifiable;
 
@@ -38,13 +38,4 @@ class User extends Authenticatable implements Transformable
         'email_verified_at' => 'datetime',
     ];
 
-    public function transform()
-    {
-        // TODO: Implement transform() method.
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email
-        ];
-    }
 }

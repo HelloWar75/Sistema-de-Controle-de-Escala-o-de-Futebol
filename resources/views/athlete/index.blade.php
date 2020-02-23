@@ -8,10 +8,10 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6" style="padding-top: 5px;">
-                                <h4>Equipes</h4>
+                                <h4>Atletas</h4>
                             </div>
                             <div class="col-md-6">
-                                <a href="{{ route('team.create') }}" class="btn btn-primary float-right">Criar nova equipe</a>
+                                <a href="{{ route('athlete.create') }}" class="btn btn-primary float-right">Criar nova equipe</a>
                             </div>
                         </div>
                     </div>
@@ -30,18 +30,24 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nome</th>
+                                    <th scope="col">Camisa</th>
+                                    <th scope="col">Time</th>
+                                    <th scope="col">Posição</th>
                                     <th scope="col">Opções</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($teams as $v)
+                                @foreach($athletes as $v)
                                 <tr>
                                     <th scope="row">{{ $v["id"] }}</th>
                                     <td>{{ $v["name"] }}</td>
+                                    <td>{{ $v["shirt_number"] }}</td>
+                                    <td>{{ $v["team"]["name"] }}</td>
+                                    <td>{{ $v["position"]["name"] }}</td>
                                     <td>
-                                      <a href="{{ route('team.show', $v["id"]) }}" class="btn btn-primary">Visualizar</a>
-                                      <a href="{{ route('team.edit', $v["id"]) }}" class="btn btn-warning">Editar</a>
-                                      <form style="display: inline;" action="{{ route('team.destroy', $v["id"]) }}" method="post">
+                                      <a href="{{ route('athlete.show', $v["id"]) }}" class="btn btn-primary">Visualizar</a>
+                                      <a href="{{ route('athlete.edit', $v["id"]) }}" class="btn btn-warning">Editar</a>
+                                      <form style="display: inline;" action="{{ route('athlete.destroy', $v["id"]) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Deletar</button>

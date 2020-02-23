@@ -19,3 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/team', 'TeamController')->middleware('auth');
+Route::resource('/athlete', 'AthleteController')->middleware('auth');
+Route::resource('/escalation', 'EscalationController')->middleware('auth');

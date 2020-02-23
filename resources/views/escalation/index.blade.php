@@ -8,10 +8,10 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6" style="padding-top: 5px;">
-                                <h4>Equipes</h4>
+                                <h4>Escalações</h4>
                             </div>
                             <div class="col-md-6">
-                                <a href="{{ route('team.create') }}" class="btn btn-primary float-right">Criar nova equipe</a>
+                                <a href="{{ route('escalation.create') }}" class="btn btn-primary float-right">Criar nova escalação</a>
                             </div>
                         </div>
                     </div>
@@ -30,18 +30,22 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nome</th>
+                                    <th scope="col">Time 1</th>
+                                    <th scope="col">Time 2</th>
                                     <th scope="col">Opções</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($teams as $v)
+                                @foreach($escalations as $v)
                                 <tr>
                                     <th scope="row">{{ $v["id"] }}</th>
                                     <td>{{ $v["name"] }}</td>
+                                    <td>{{ $v["time_1"]["name"] }}</td>
+                                    <td>{{ $v["time_2"]["name"] }}</td>
                                     <td>
-                                      <a href="{{ route('team.show', $v["id"]) }}" class="btn btn-primary">Visualizar</a>
-                                      <a href="{{ route('team.edit', $v["id"]) }}" class="btn btn-warning">Editar</a>
-                                      <form style="display: inline;" action="{{ route('team.destroy', $v["id"]) }}" method="post">
+                                      <a href="{{ route('escalation.show', $v["id"]) }}" class="btn btn-primary">Visualizar</a>
+                                      <a href="{{ route('escalation.edit', $v["id"]) }}" class="btn btn-warning">Editar</a>
+                                      <form style="display: inline;" action="{{ route('escalation.destroy', $v["id"]) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Deletar</button>

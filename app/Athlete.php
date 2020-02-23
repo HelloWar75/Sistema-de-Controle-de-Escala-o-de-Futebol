@@ -11,12 +11,12 @@ class Athlete extends Model implements Transformable
 
     public function team()
     {
-        $this->hasOne(Team);
+        return $this->hasOne(Team);
     }
 
     public function position()
     {
-        $this->hasOne(Position);
+        return $this->hasOne(Position);
     }
 
     public function transform()

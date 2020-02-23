@@ -3,18 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\TeamRepositoryEloquent;
-use App\Team;
+use App\Entities\Team;
+use App\Validators\TeamValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Prettus\Validator\Exceptions\ValidatorException;
 
 class TeamController extends Controller
 {
 
     protected $repository;
+    protected $validator;
 
-    public function __construct(TeamRepositoryEloquent $repository)
+    public function __construct(TeamRepositoryEloquent $repository, TeamValidator $validator)
     {
         $this->repository = $repository;
+        $this->validator = $validator;
     }
 
     /**
@@ -56,18 +60,15 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         //
-        $validator = Validator::make($request->all(),[
-          'name' => 'required|unique:teams|max:255|min:5'
-        ]);
 
-        if ( $validator->fails() ) {
-          return redirect(route('team.create'))->withErrors($validator)->withInput();
+        try{
+
+            $this->validator->with($request->all())->passesOrFail();
+            $this->repository->create($request->all());
+
+        }catch (ValidatorException $e){
+            redirect(route('team.index'))->withErrors("Erro ao criar o cadastro!");
         }
-
-        $name = $request->name;
-        $this->repository->create([
-          'name' => $name
-        ]);
 
         return redirect(route('team.index'))->with('status', 'Criado com sucesso!');
     }
@@ -78,9 +79,12 @@ class TeamController extends Controller
      * @param  \App\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function show(Team $team)
+    public function show($id)
     {
         //
+        $data = [];
+        $data["team"] = $this->repository->find($id)["data"];
+        return view('team.show', $data);
     }
 
     /**
@@ -89,9 +93,12 @@ class TeamController extends Controller
      * @param  \App\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function edit(Team $team)
+    public function edit($id)
     {
         //
+        $data = [];
+        $data["team"] = $this->repository->find($id)["data"];
+        return view('team.edit', $data);
     }
 
     /**
@@ -101,9 +108,19 @@ class TeamController extends Controller
      * @param  \App\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Team $team)
+    public function update(Request $request, $id)
     {
         //
+        try{
+
+            $this->validator->with($request->all())->passesOrFail();
+            $this->repository->update($request->all(), $id);
+
+        }catch (ValidatorException $e){
+            redirect(route('team.index'))->withErrors("Erro ao atualizar o cadastro!");
+        }
+
+        return redirect(route('team.index'))->with('status', 'Atualizado com sucesso!');
     }
 
     /**
@@ -112,8 +129,14 @@ class TeamController extends Controller
      * @param  \App\Team  $team
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Team $team)
+    public function destroy($id)
     {
         //
+        if($this->repository->delete($id)) {
+            return redirect(route('team.index'))->with('status', 'Deletado com sucesso!');
+        }else{
+            return redirect(route('team.index'))->withErrors('Erro ao deletar o cadastro!');
+        }
+
     }
 }
