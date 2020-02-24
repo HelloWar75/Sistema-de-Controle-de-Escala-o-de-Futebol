@@ -100,7 +100,7 @@ class EscalationController extends Controller
         ];
 
         try{
-            $this->validator->with($party_data)->passesOrFail();
+            $this->validator->with($party_data)->passesOrFail(ValidatorInterface::RULE_CREATE);
             $creted_id = $this->repository->create($party_data)["data"]["id"];
         }catch (ValidatorException $e){
             return redirect(route('escalation.index'))->withErrors($e->getMessage());

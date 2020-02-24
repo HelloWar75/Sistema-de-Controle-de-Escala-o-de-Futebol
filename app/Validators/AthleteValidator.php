@@ -18,7 +18,9 @@ class AthleteValidator extends LaravelValidator
      * @var array
      */
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [],
-        ValidatorInterface::RULE_UPDATE => [],
+        'position_id' => 'required',
+        'team_id' => 'required',
+        'name' => 'required',
+        'shirt_number' => 'required'
     ];
 }

@@ -18,7 +18,15 @@ class PartyValidator extends LaravelValidator
      * @var array
      */
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_CREATE => [
+            'name' => 'required',
+            'team_1_id' => 'required',
+            'team_2_id' => 'required',
+            'party_date' => 'required'
+        ],
+        ValidatorInterface::RULE_UPDATE => [
+            'name' => 'required',
+            'party_date' => 'required'
+        ],
     ];
 }
