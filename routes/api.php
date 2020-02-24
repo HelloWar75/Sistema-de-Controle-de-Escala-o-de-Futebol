@@ -13,3 +13,5 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('/reports/partidas_disputadas', 'ReportsController@report_partidas_disputadas');
+Route::get('/reports/escalacoes_por_atetlas', 'ReportsController@report_per_athlete');

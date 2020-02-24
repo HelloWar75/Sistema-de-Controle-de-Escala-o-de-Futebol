@@ -37,7 +37,7 @@ class AthleteController extends Controller
     {
         //
         $data = [];
-        $repo_data = $this->repository->paginate(2);
+        $repo_data = $this->repository->paginate(10);
         $pagination = $repo_data["meta"]["pagination"];
         $data["athletes"] = $repo_data["data"];
         $data["links"] = paginate(route('athlete.index'), $pagination["current_page"], $pagination["total"], $pagination["per_page"]);

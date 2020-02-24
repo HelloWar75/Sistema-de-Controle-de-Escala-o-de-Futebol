@@ -40,8 +40,8 @@
                                 <tr>
                                     <th scope="row">{{ $v["id"] }}</th>
                                     <td>{{ $v["name"] }}</td>
-                                    <td>{{ $v["time_1"]["name"] }}</td>
-                                    <td>{{ $v["time_2"]["name"] }}</td>
+                                    <td>{{ $v["team_1"]["name"] }}</td>
+                                    <td>{{ $v["team_2"]["name"] }}</td>
                                     <td>
                                       <a href="{{ route('escalation.show', $v["id"]) }}" class="btn btn-primary">Visualizar</a>
                                       <a href="{{ route('escalation.edit', $v["id"]) }}" class="btn btn-warning">Editar</a>

@@ -13,7 +13,6 @@ use Prettus\Repository\Traits\TransformableTrait;
  */
 class Party extends Model implements Transformable
 {
-    use TransformableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -24,23 +23,25 @@ class Party extends Model implements Transformable
         'name',
         'team_1_id',
         'team_2_id',
-        'date'
+        'party_date'
     ];
 
     public function team_1()
     {
-        return $this->hasOne('App\Entities\Team', 'teams.id', 'team_1_id');
+        return $this->belongsTo('App\Entities\Team');
     }
 
     public function team_2()
     {
-        return $this->hasOne('App\Entities\Team', 'teams.id', 'team_2_id');
+        return $this->belongsTo('App\Entities\Team');
     }
 
     public function transform()
     {
         // TODO: Implement transform() method.
+        $date = new \DateTime($this->party_date);
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'team_1' => [
                 'id' => $this->team_1->id,
@@ -50,7 +51,7 @@ class Party extends Model implements Transformable
                 'id' => $this->team_2->id,
                 'name' => $this->team_2->name
             ],
-            'date' => $this->party_date
+            'date' => $date->format('Y-m-d')
         ];
     }
 

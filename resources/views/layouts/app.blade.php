@@ -42,6 +42,12 @@
                         <li class="nav-item">
                             <a href="{{ route('athlete.index') }}" class="nav-link">Atletas</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('escalation.index') }}" class="nav-link">Escalação</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('reports.index') }}" class="nav-link">Relatórios</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -71,7 +77,7 @@
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
-                                    </form>1/edit
+                                    </form>
                                 </div>
                             </li>
                         @endguest
