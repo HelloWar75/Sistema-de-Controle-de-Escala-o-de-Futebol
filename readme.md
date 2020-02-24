@@ -1,4 +1,4 @@
-#Sistema para escalações de time de futebol
+# Sistema para escalações de time de futebol
 
 Para instalar o sistema após baixar digitar no terminal:
 composer install
